@@ -13,3 +13,5 @@
 *.blg
 *.run.xml
 *.synctex.*
+*.DS_Store
+.DS_Store

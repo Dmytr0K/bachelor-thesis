@@ -10,7 +10,10 @@
 \usepackage{indentfirst}                           % Красная строка для первых абзацев
 \usepackage{mathtools}
 \usepackage{tabularx}                              % Много табличной боли и магии
+\usepackage{color, colortbl}                       % Добавляем кольор
+\definecolor{Gray}{gray}{0.9}                      % Добавляем серый цвет
 \usepackage[pdftex]{graphicx}                      % Для вставки картинок
+\usepackage{listings}                              % Для вставки кода
 \usepackage{titlesec}                              % Для настройки названий глав, разделов итп
 \usepackage{titletoc}                              % Для настройки оглавления
 \usepackage{enumitem}                              % Для настройки списков
@@ -24,6 +27,18 @@
 \usepackage{chngcntr}                              % Чтоб настроить сквозную нумерацию
 \usepackage{lastpage}                              % Получить количество страниц
 \usepackage[figure,table]{totalcount}              % Получить количество рисунков и таблиц
+
+%ссылки
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks,
+  pdftitle={Diplom},
+  pdfauthor={Dmytro Kukhno},
+  allcolors=[RGB]{000 000 000}}
+  
+% Хак для того чтобы аннотация была на 4 странице
+\setcounter{page}{0}
+
 
 % Библиография
 \usepackage[
@@ -207,7 +222,7 @@
 %-------------------------------- НАСТРОЙКИ СПИСКОВ ----------------------------
 % Маркерный список
 \setlist[itemize]{
-	label=-,                  % Дефис в каяестве маркера
+	label=–,                  % Дефис в каяестве маркера
 	leftmargin=1.5cm,         % Текст в списке выравнен по красной строке
 	itemindent=15pt,          % Маркер выравнен по красной строке, т.е. первая строка чуть сдвинута на размер маркера
 	nosep                     % Убираем интервал между пунктами списков
@@ -217,7 +232,7 @@
 \setlist[enumerate]{
     label*=\arabic*),
     leftmargin=1.5cm,
-    itemindent=15pt,
+    itemindent=20pt,
     nosep
 }
 
@@ -229,16 +244,22 @@
 	name=Рисунок,
 	labelsep=endash,
 	justification=centering,
-	belowskip=-17pt,aboveskip=0pt,
+	belowskip=-10pt,aboveskip=0pt,
 	font={stretch=1.3}
 }
-\captionsetup[table]{name=Таблица, labelsep=endash, justification=raggedright, singlelinecheck=false}
+\captionsetup[table]{name=Таблица, labelsep=endash, justification=raggedleft, singlelinecheck=false}
 
 % Сквозная нумерация таблиц, рисунков и формул
 \counterwithout{figure}{chapter}
 \counterwithout{table}{chapter}
 \counterwithout{equation}{chapter}
 \pdfimageresolution=150
+
+% Заголовок таблицы серый, выравнивание по центру
+\makeatletter
+\newcommand{\tabheader}[1]{\hline\rowcolor{Gray}\multicolumn{1}{|c|}{#1}\checknextarg}
+\newcommand{\checknextarg}{\@ifnextchar\bgroup{\gobblenextarg}{\\\hline}}
+\newcommand{\gobblenextarg}[1]{&\multicolumn{1}{c|}{#1}\@ifnextchar\bgroup{\gobblenextarg}{\\\hline}}
 
 %\setlength{\belowcaptionskip}{-14pt}
 
@@ -252,4 +273,6 @@
 
 %-------------------------------- БИБЛИОГРАФИЯ ---------------------------------
 
-\addbibresource{autonomouscar.bib}
+
+
+%\addbibresource{hexapod.bib}
